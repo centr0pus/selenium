@@ -148,9 +148,8 @@ public class Topic_02_Locator {
         driver.findElement(By.xpath("//a[text()='Câu hỏi thường gặp']"));
 
         //5. XPath voi partial link
-
         driver.findElement(By.xpath("//a[starts-with(@href,'https://alada.vn/cau-hoi-thuong-gap.html')]"));
-        driver.findElement(By.xpath("//a[contains(@href,'alada.vn/cau-hoi-thuong-gap.html')]));
+        driver.findElement(By.xpath("//a[contains(@href,'alada.vn/cau-hoi-thuong-gap.html')]"));
         //Xpath khong support voi end-with
 
 
