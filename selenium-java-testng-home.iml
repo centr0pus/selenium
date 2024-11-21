@@ -10,5 +10,6 @@
     <orderEntry type="library" name="libraries" level="project" />
     <orderEntry type="library" name="testng-7.10.2" level="project" />
     <orderEntry type="library" name="selenium" level="project" />
+    <orderEntry type="library" name="testng-7.10.2" level="project" />
   </component>
 </module>
