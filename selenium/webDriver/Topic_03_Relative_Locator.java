@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class Topic_02_Relative_Locator {
+public class Topic_03_Relative_Locator {
     WebDriver driver;
 
     @BeforeClass
