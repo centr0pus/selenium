@@ -3,6 +3,7 @@ package webdriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -71,7 +72,7 @@ public class Topic_02_By_Locator {
     public void TC_06_TagName() {
         //tim nhieu element giong nhau
         driver.get("https://alada.vn/tai-khoan/dang-ky.html");
-        Dimension linkNubmer = driver.findElement(By.tagName("a")).getSize();
+        int linkNubmer = driver.findElements(By.tagName("a")).size();
         System.out.println("Tong so luong la: "+ linkNubmer);
     }
 
