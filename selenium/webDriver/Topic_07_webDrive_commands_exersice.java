@@ -36,18 +36,36 @@ public class Topic_07_webDrive_commands_exersice {
 
     @Test
     public void TC_02_Page_Title() {
+        driver.get("https://live.techpanda.org/");
+        driver.findElement(By.cssSelector("div.footer a[title='My Account']")).click();
+        //driver.findElement(By.xpath("//div[@class='footer']//a[@title='My Account']")).click();
+        Assert.assertEquals(driver.getTitle(),"Customer Login");
+        driver.findElement(By.cssSelector("a[title='Create an Account']")).click();
+        //driver.findElement(By.xpath("//a[@title='Create an Account']")).click();
+        Assert.assertEquals(driver.getTitle(),"Create New Customer Account");
+    }
+
+    @Test
+    public void TC_03_Navigate_Back_Forward() {
+        driver.get("https://live.techpanda.org/");
+        driver.findElement(By.cssSelector("div.footer a[title='My Account']")).click();
+        driver.findElement(By.cssSelector("a[title='Create an Account']")).click();
+        Assert.assertEquals(driver.getCurrentUrl(),"https://live.techpanda.org/index.php/customer/account/create/");
+        driver.navigate().back();// back lai trang truoc do
+        driver.navigate().forward();//chuyen tiep trang truoc do
+        Assert.assertEquals(driver.getTitle(),"Create New Customer Account");
+
 
 
     }
 
     @Test
-    public void TC_03_Page_Title() {
+    public void TC_04_Page_Source() {
+        driver.get("https://live.techpanda.org/");
+        driver.findElement(By.cssSelector("div.footer a[title='My Account']")).click();
+        Assert.assertTrue(driver.getPageSource().contains("Login or Create an Account"));
 
 
-    }
-
-    @Test
-    public void TC_04_Page_Title() {
 
 
     }
