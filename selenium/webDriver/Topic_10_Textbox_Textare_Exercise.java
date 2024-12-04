@@ -35,7 +35,7 @@ public class Topic_10_Textbox_Textare_Exercise {
         String nickName = first_name + " " + last_name;
 
 
-        driver.get("https://live.techpanda.org");
+        driver.get("http://live.techpanda.org");
         driver.findElement(By.cssSelector("div.footer a[title='My Account']")).click();
         driver.findElement(By.cssSelector("a[title='Create an Account']")).click();
 
@@ -74,9 +74,15 @@ public class Topic_10_Textbox_Textare_Exercise {
 
     @Test
     public void TC_02() {
-        Random email_add = new Random();
-        System.out.println("Gia tri la: " +email_add.nextInt(9999));
 
+        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+
+        driver.findElement(By.name("username")).sendKeys("Admin");
+        driver.findElement(By.name("password")).sendKeys("admin123");
+        driver.findElement(By.cssSelector("button[type='submit']")).click();
+
+        driver.findElement(By.xpath("//ul[@class='oxd-main-menu']//li[@class='oxd-main-menu-item-wrapper'][position()=2]")).click();
+        driver.findElement(By.xpath("//span[text()='PIM']")).click();
     }
 
     @AfterClass
