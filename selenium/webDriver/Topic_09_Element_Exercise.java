@@ -9,7 +9,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import java.time.Duration;
 
-public class Topic_08_WebElement_Exercise {
+public class Topic_09_Element_Exercise {
     WebDriver driver;
 
     @BeforeClass
@@ -36,11 +36,20 @@ public class Topic_08_WebElement_Exercise {
         Assert.assertTrue(driver.findElement(By.cssSelector("textarea#edu")).isDisplayed());
         driver.findElement(By.cssSelector("textarea#edu")).sendKeys("Automation Testing FC");
         System.out.println("Education is Dislayed");
+
+        Assert.assertFalse(driver.findElement(By.xpath("//h5[text()='Name: User5']")).isDisplayed());
+        System.out.println("User 5 is Not Dislayed");
     }
 
     @Test
-    public void TC_02_() {
-        driver.get("https://www.facebook.com/");
+    public void TC_02_isEnable_Disable() {
+        driver.get("https://automationfc.github.io/basic-form/index.html");
+
+        Assert.assertTrue(driver.findElement(By.cssSelector("input#mail")).isEnabled());
+        System.out.println("Email is Enabel");
+
+        Assert.assertTrue(driver.findElement(By.cssSelector("input#under_18")).isEnabled());
+        System.out.println("Under 18 is Enable");
 
     }
 
