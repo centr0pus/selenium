@@ -47,7 +47,7 @@ public class Topic_10_Textbox_Textare_Exercise {
 
         driver.findElement(By.cssSelector("button[title='Register']")).click();
 
-        Thread.sleep(3000);
+        //Thread.sleep(3000);
 
         Assert.assertEquals(driver.findElement(By.cssSelector("li.success-msg span")).getText(),"Thank you for registering with Main Website Store.");
 
