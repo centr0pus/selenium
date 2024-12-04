@@ -18,7 +18,7 @@ public class Topic_04_Register {
     public void beforeClass(){
         // Arrange
         driver = new FirefoxDriver();
-        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
     }
 
     @Test
