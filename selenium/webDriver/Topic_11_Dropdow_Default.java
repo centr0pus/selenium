@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -16,6 +17,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -24,18 +26,24 @@ public class Topic_11_Dropdow_Default {
 
     @BeforeClass
     public void beforeClass(){
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--user-data-dir=C:/Users/ADMIN/AppData/Local/Google/Chrome/User Data/");
-        chromeOptions.addArguments("--profile-directory=Profile 1");
-        driver = new ChromeDriver(chromeOptions);
+//       ChromeOptions chromeOptions = new ChromeOptions();
+//       chromeOptions.addArguments("--user-data-dir=C:/Users/ADMIN/AppData/Local/Google/Chrome/User Data/");
+//       chromeOptions.addArguments("--profile-directory=Profile 1");
+//       driver = new ChromeDriver(chromeOptions);
 
-      //  EdgeOptions edgeOptions = new EdgeOptions();
-      //  edgeOptions.addArguments("--user-data-dir=C:/Users/ADMIN/AppData/Local/Google/Chrome/User Data/");
-      //  edgeOptions.addArguments("--profile-directory=Profile 5");
-      //  driver = new EdgeDriver(edgeOptions);
+// location on Chrome & Edge
+//        ChromeOptions option = new ChromeOptions();
+//        options.addArguments("--disable-geolocation");
+//        driver = new ChromeDriver(options);
+
+        FirefoxOptions option = new FirefoxOptions();
+        option.addPreference("geo.enabled", false);
+        option.addPreference("geo.provider.use_corelocation", false);
+        driver = new FirefoxDriver(option);
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.manage().window().maximize();
+
     }
 
     @Test
@@ -150,7 +158,7 @@ public class Topic_11_Dropdow_Default {
     }
 
     @Test
-    public void TC_04_Rode(){
+    public void TC_04_Rode() throws InterruptedException {
         driver.get("https://www.rode.com/wheretobuy");
         String country = "Vietnam";
         String search ="HO CHI MINH";
@@ -159,23 +167,24 @@ public class Topic_11_Dropdow_Default {
         //1.Field Country
         select = new Select(driver.findElement(By.id("country")));
         select.selectByContainsVisibleText(country);
-        Assert.assertTrue(new Select(driver.findElement(By.id("country"))).isMultiple());
+        Thread.sleep(2000);
+        Assert.assertFalse(new Select(driver.findElement(By.id("country"))).isMultiple());
 
         //2. Field Search
         driver.findElement(By.id("map_search_query")).sendKeys(search);
+        Thread.sleep(2000);
 
         //3. Click Search Btn
         driver.findElement(By.xpath("//button[text()='Search']")).click();
 
         //4. Verify have 16 result
-        driver.findElement(By.xpath("//h3[text()='Dealers']/following-sibling::div/div"));
+        //driver.findElement(By.cssSelector("div.dealer_branch h4.text-left"));
+        List<WebElement> dealerBranches = driver.findElements(By.cssSelector("div.dealer_branch h4.text-left"));
+        Assert.assertEquals(dealerBranches.size(),16);
 
+        for(WebElement element:dealerBranches){
+            System.out.println(element.getText());
 
-
-        List<WebElement> dealers = driver.findElement(By.xpath("//h3[text()='Dealers']/following-sibling::div/div"));
-        Assert.assertEquals(dealers.size(),"16");
-        for (WebElement element:dealers){
-            System.out.println("Danh sach la " + element.getText());
         }
     }
 
