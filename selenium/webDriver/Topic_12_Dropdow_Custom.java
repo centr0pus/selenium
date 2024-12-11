@@ -54,26 +54,66 @@ public class Topic_12_Dropdow_Custom {
             }
         }
     //Speed drop_dow: su dung loi goi ham
-        selectItemDropdow("speed-button","ul#speed-menu div","Faster");
+        selectItemDropdow("span#speed-button","ul#speed-menu div","Faster");
         Assert.assertEquals(driver.findElement(By.cssSelector("span#speed-button>span.ui-selectmenu-text")).getText(),"Faster");
 
     //File drop_dow
-        selectItemDropdow("files-button", "ul#files-menu div", "ui.jQuery.js");
+        selectItemDropdow("span#files-button", "ul#files-menu div", "ui.jQuery.js");
         Assert.assertEquals(driver.findElement(By.cssSelector("span#files-button>span.ui-selectmenu-text")).getText(),"ui.jQuery.js");
 
     //Number drop_dow
-        selectItemDropdow("number-button", "ul#number-menu div", "14");
+        selectItemDropdow("span#number-button", "ul#number-menu div", "14");
         Assert.assertEquals(driver.findElement(By.cssSelector("span#number-button>span.ui-selectmenu-text")).getText(),"14");
 
     //Salutation drop_dow
-        selectItemDropdow("salutation-button", "ul#salutation-menu div", "Prof.");
+        selectItemDropdow("span#salutation-button", "ul#salutation-menu div", "Prof.");
         Assert.assertEquals(driver.findElement(By.cssSelector("span#salutation-button>span.ui-selectmenu-text")).getText(),"Prof.");
 
     }
 
+    @Test
+    public void TC_02_React_Semantic() throws InterruptedException {
+        driver.get("https://react.semantic-ui.com/maximize/dropdown-example-selection/");
+        selectItemDropdow("div#root","div[class ='visible menu transition']>div","Stevie Feliciano");
+        Assert.assertEquals(driver.findElement(By.cssSelector("div[class ='divider text']")).getText(),"Stevie Feliciano");
+
+        selectItemDropdow("div#root","div[class ='visible menu transition']>div","Justen Kitsune");
+        Assert.assertEquals(driver.findElement(By.cssSelector("div[class ='divider text']")).getText(),"Justen Kitsune");
+
+    }
+
+    @Test
+    public void TC_03_VueJS () throws InterruptedException {
+        driver.get("https://mikerodham.github.io/vue-dropdowns/");
+        //Cach 1: Viet tuan tu theo cac buoc
+        driver.findElement(By.cssSelector("div[class ='btn-group']")).click();
+        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("ul[class = 'dropdown-menu']>li")));
+        List<WebElement> listItemVeu = driver.findElements(By.cssSelector("ul[class = 'dropdown-menu']>li"));
+        for (WebElement itemChoose:listItemVeu){
+            if(itemChoose.getText().trim().equals("First Option")){
+                itemChoose.click();
+                break;
+            }
+        }
+        Assert.assertEquals(driver.findElement(By.cssSelector("li.dropdown-toggle")).getText(),"First Option");
+
+        //Cach 2: Goi ham
+        selectItemDropdow("div[class ='btn-group']","ul[class = 'dropdown-menu']>li","Second Option");
+        Assert.assertEquals(driver.findElement(By.cssSelector("li.dropdown-toggle")).getText(),"Second Option");
+
+    }
+
+    @Test
+    public void TC_04_Editable_Semantic() throws InterruptedException {
+        driver.get("https://react.semantic-ui.com/maximize/dropdown-example-search-selection/");
+        selectItemDropdow("div.selection","div.transition>div","Belgium");
+
+    }
+
+
     private void selectItemDropdow(String parentDropdow, String childListValue, String item) throws InterruptedException {
         //1. Tim dropdow & Click
-        driver.findElement(By.id(parentDropdow)).click();
+        driver.findElement(By.cssSelector(parentDropdow)).click();
         Thread.sleep(1500);
 
         //2. Wait cho den khi cac item dc load het ra
@@ -85,7 +125,7 @@ public class Topic_12_Dropdow_Custom {
         //4. Duyet qua cac gia tri de ktra
         for (WebElement itemChoose : listItemSpeed) {
             //Ktra dieu kien: neu text cua item lay ra bang voi ket qua mong doi
-            if (itemChoose.getText().equals(item)) {
+            if (itemChoose.getText().trim().equals(item)) {
                 // thi click chon
                 itemChoose.click();
                 // sau do thoat khoi vong lap
@@ -94,16 +134,7 @@ public class Topic_12_Dropdow_Custom {
         }
     }
 
-    @Test
-    public void TC_02_React_Semantic() {
-        driver.get("https://www.facebook.com/");
 
-    }
-
-    @Test
-    public void TC_03_VueJS(){
-
-    }
 
     @Test
     public void TC_04_Edit_Table(){
