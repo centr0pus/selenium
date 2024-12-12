@@ -106,12 +106,81 @@ public class Topic_12_Dropdow_Custom {
     @Test
     public void TC_04_Editable_Semantic() throws InterruptedException {
         driver.get("https://react.semantic-ui.com/maximize/dropdown-example-search-selection/");
-        selectItemDropdow("div.selection","div.transition>div","Belgium");
+        selectItemDropdow("input.search","div.visible.menu.transition span.text","Anguilla");
+        Assert.assertEquals(driver.findElement(By.cssSelector("div.text")).getText(),"Anguilla");
+
+        selectItemEditable("input.search","div.visible.menu.transition span.text","Anguilla");
+        Assert.assertEquals(driver.findElement(By.cssSelector("div.text")).getText(),"Anguilla");
+    }
+
+    @Test
+    public void TC_05_Editable_Huawei() throws InterruptedException {
+        driver.get("https://id5.cloud.huawei.com/CAS/portal/userRegister/regbyemail.html");
+
+        selectItemEditableHuawie("div[ht='input_emailregister_dropdown']",
+                "input[ht='input_emailregister_search']", "ul[class='hwid-list-module'] span","Anguilla");
+        Assert.assertEquals(driver.findElement(By.cssSelector("div[ht='input_emailregister_dropdown']>span")).getText(),"Anguilla");
+
+        selectItemEditableHuawie("div[ht='input_emailregister_dropdown']",
+                "input[ht='input_emailregister_search']", "ul[class='hwid-list-module'] span","Venezuela");
+        Assert.assertEquals(driver.findElement(By.cssSelector("div[ht='input_emailregister_dropdown']>span")).getText(),"Venezuela");
+
+    }
+
+    public void selectItemEditableHuawie(String parentLocator,String inputSearch, String childLocator, String itemInput) throws InterruptedException {
+
+        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.elementToBeClickable(By.cssSelector(parentLocator)));
+
+        driver.findElement(By.cssSelector(parentLocator)).click();
+        Thread.sleep(2000);
+
+        driver.findElement(By.cssSelector(inputSearch)).clear();
+        driver.findElement(By.cssSelector(inputSearch)).sendKeys(itemInput);
+        Thread.sleep(2000);
+
+        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(childLocator)));
+
+        List<WebElement> listItem = driver.findElements(By.cssSelector(childLocator));
+
+        for (WebElement itemChoose:listItem){
+
+            if(itemChoose.getText().trim().equals(itemInput));
+
+            itemChoose.click();
+
+            break;
+        }
+
+
+
+    }
+
+    public void selectItemEditable(String parentLocator, String childLocator, String itemInput) throws InterruptedException {
+
+        driver.findElement(By.cssSelector(parentLocator)).clear();
+
+        driver.findElement(By.cssSelector(parentLocator)).sendKeys(itemInput);
+        Thread.sleep(1500);
+
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(childLocator)));
+
+        List<WebElement> listItem = driver.findElements(By.cssSelector(childLocator));
+
+        for (WebElement itemChoose:listItem){
+
+            if(itemChoose.getText().equals(itemInput));
+
+            itemChoose.click();
+
+            break;
+        }
+
+
 
     }
 
 
-    private void selectItemDropdow(String parentDropdow, String childListValue, String item) throws InterruptedException {
+    private void selectItemDropdow(String parentDropdow, String childListValue, String itemInput) throws InterruptedException {
         //1. Tim dropdow & Click
         driver.findElement(By.cssSelector(parentDropdow)).click();
         Thread.sleep(1500);
@@ -125,7 +194,7 @@ public class Topic_12_Dropdow_Custom {
         //4. Duyet qua cac gia tri de ktra
         for (WebElement itemChoose : listItemSpeed) {
             //Ktra dieu kien: neu text cua item lay ra bang voi ket qua mong doi
-            if (itemChoose.getText().trim().equals(item)) {
+            if (itemChoose.getText().trim().equals(itemInput)) {
                 // thi click chon
                 itemChoose.click();
                 // sau do thoat khoi vong lap
