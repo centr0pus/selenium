@@ -59,13 +59,43 @@ public class Topic_13_Button {
         //Assert.assertFalse(driver.findElement(By.cssSelector("button.fhs-btn-login")).isEnabled());
         //Assert.assertFalse(new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(btnLogin))));
 
-
-
     }
 
     @Test
-    public void TC_02_() {
-        driver.get("https://www.facebook.com/");
+    public void TC_02_Ubot() {
+        String userName = "binhtt920@gmail.com";
+        String password = "Binhtt920@@";
+
+        driver.get("https://portal-dev.ubot.vn/login");
+
+       // driver.findElement(By.id("username")).sendKeys("");
+       // driver.findElement(By.id("password")).sendKeys("");
+
+      //  driver.findElement(By.id("rememberMe")).click();
+        // verify btn login disabel and color + checkbox is unselected
+        Assert.assertFalse(driver.findElement(By.id("rememberMe")).isSelected());
+        By loginBtn = By.xpath("//button[text()='Đăng nhập']");
+        Assert.assertFalse(driver.findElement(By.xpath("//button[text()='Đăng nhập']")).isEnabled());
+        Assert.assertEquals(Color.fromString(driver.findElement(loginBtn).getCssValue("background-color")).asHex().toLowerCase(),"#ed1c24");
+
+        //Login success
+        driver.findElement(By.id("username")).sendKeys(userName);
+        driver.findElement(By.id("password")).sendKeys(password);
+        driver.findElement(By.id("rememberMe")).click();
+
+        Assert.assertEquals(driver.findElement(By.id("username")).getDomProperty("value"),userName);
+        Assert.assertTrue(driver.findElement(By.id("rememberMe")).isSelected());
+
+        Assert.assertEquals(Color.fromString(driver.findElement(loginBtn).getCssValue("background-color")).asHex().toLowerCase(),"#ed1c24");
+        Assert.assertTrue(driver.findElement(By.xpath("//button[text()='Đăng nhập']")).isEnabled());
+        driver.findElement(loginBtn).click();
+
+        String loginMess = driver.findElement(By.cssSelector("div[jhitranslate='login.messages.error.authentication']")).getText();
+        System.out.printf(loginMess);
+
+        Assert.assertTrue(driver.findElement(By.cssSelector("div[jhitranslate='login.messages.error.authentication']")).getText().contains(loginMess));
+
+
 
     }
 
