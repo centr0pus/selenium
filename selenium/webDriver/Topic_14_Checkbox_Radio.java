@@ -6,7 +6,6 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import java.time.Duration;
 import java.util.List;
 
@@ -116,6 +115,7 @@ public class Topic_14_Checkbox_Radio {
         for(WebElement checkbox:allCheckboxes){
             if (!checkbox.isSelected() && checkbox.getDomAttribute("value").equals("Fainting Spells")) {
                 checkbox.click();
+                Assert.assertTrue(checkbox.isSelected());
             }
         }
 
@@ -125,6 +125,36 @@ public class Topic_14_Checkbox_Radio {
             }
 
         }
+    }
+
+    @Test
+    public void TC_06_Ubuntu() {
+        driver.get("https://login.ubuntu.com/");
+
+        //C1: dung the input click va verify
+        //driver.findElement(By.id("id_new_user")).click();
+        //Assert.assertFalse(driver.findElement(By.id("id_new_user")).isSelected());
+
+        //C2: dung the label de click va verify
+        //driver.findElement(By.cssSelector("label.new-user")).click();
+        //Assert.assertTrue(driver.findElement(By.cssSelector("label.new-user")).isSelected());
+
+        //C3: dung the label de click va the input de verify
+        //driver.findElement(By.cssSelector("label.new-user")).click();
+        //Assert.assertTrue(driver.findElement(By.id("id_new_user")).isSelected());
+
+        //C4: Dung duy nhat the Input de click/verify voi jsExecutor
+        //JavascriptExecutor js = (JavascriptExecutor) driver;
+        //js.executeScript("arguments[0].click();",driver.findElement(By.id("id_new_user")));
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click();",driver.findElement(By.id("id_new_user")));
+        Assert.assertTrue(driver.findElement(By.id("id_new_user")).isSelected());
+
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click();",driver.findElement(By.id("id_accept_tos")));
+        Assert.assertTrue(driver.findElement(By.id("id_accept_tos")).isSelected());
+
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click();",driver.findElement(By.id("id_returning_user")));
+        Assert.assertTrue(driver.findElement(By.id("id_returning_user")).isSelected());
+
     }
 
     @AfterClass
