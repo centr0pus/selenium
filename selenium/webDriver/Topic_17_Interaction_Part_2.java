@@ -69,7 +69,7 @@ public class Topic_17_Interaction_Part_2 {
     @Test
     public void TC_03_Double_Click () throws InterruptedException {
         driver.get("https://automationfc.github.io/basic-form/index.html");
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.xpath("//button[text()='Double click me']")));
+        //((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.xpath("//button[text()='Double click me']")));
         action.doubleClick(driver.findElement(By.xpath("//button[text()='Double click me']"))).perform();
         Thread.sleep(2000);
         Assert.assertEquals(driver.findElement(By.id("demo")).getText(),"Hello Automation Guys!");

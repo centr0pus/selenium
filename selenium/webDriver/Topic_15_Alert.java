@@ -1,14 +1,11 @@
 package webDriver;
 
-import org.apache.commons.codec.binary.Base64;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.devtools.HasDevTools;
-import org.openqa.selenium.devtools.v131.network.Network;
-import org.openqa.selenium.devtools.v131.network.model.Headers;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -118,15 +115,15 @@ public class Topic_15_Alert {
         devTools.createSession();
 
         // Enable the Network domain of devtools
-        devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
+       // devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
 
         // Encode username/ password
         Map<String, Object> headers = new HashMap<String, Object>();
-        String basicAuthen = "Basic " + new String(new Base64().encode(String.format("%s:%s", "admin", "admin").getBytes()));
-        headers.put("Authorization", basicAuthen);
+       // String basicAuthen = "Basic " + new String(new Base64().encode(String.format("%s:%s", "admin", "admin").getBytes()));
+       // headers.put("Authorization", basicAuthen);
 
         // Set to Header
-        devTools.send(Network.setExtraHTTPHeaders(new Headers(headers)));
+       // devTools.send(Network.setExtraHTTPHeaders(new Headers(headers)));
 
 
 
