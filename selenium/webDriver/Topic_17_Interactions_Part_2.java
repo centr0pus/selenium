@@ -3,17 +3,15 @@ package webDriver;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.awt.*;
 import java.time.Duration;
 import java.util.List;
 
-public class Topic_17_Interaction_Part_2 {
+public class Topic_17_Interactions_Part_2 {
     WebDriver driver;
     Actions action;
 
@@ -46,10 +44,14 @@ public class Topic_17_Interaction_Part_2 {
 
     @Test
     public void TC_02_ClickAndHold_Randoom () {
+        String osName = System.getProperty("os.name");
+
+        Keys keys = osName.startsWith("Windows") ? Keys.CONTROL : Keys.COMMAND;
+
         driver.get("https://automationfc.github.io/jquery-selectable/");
         List<WebElement> allNumber = driver.findElements(By.cssSelector("ol#selectable>li"));
         // Mo phong thao tac nhan va chon cac phan tu khac nhau
-        action.keyDown(Keys.CONTROL)  //nhan phim ctrl
+        action.keyDown(keys)  //nhan phim ctrl
                 .click(allNumber.get(0)) // chon phan tu trong danh sach
                 .click(allNumber.get(2))
                 .click(allNumber.get(5))
@@ -57,7 +59,7 @@ public class Topic_17_Interaction_Part_2 {
                 .click(allNumber.get(13))
                 .click(allNumber.get(16))
                 .click(allNumber.get(19))
-                .keyUp(Keys.CONTROL) // nha phim Ctrl
+                .keyUp(keys) // nha phim Ctrl
                 .pause(Duration.ofSeconds(2))
                 .perform(); //thuc thi
 
@@ -69,6 +71,7 @@ public class Topic_17_Interaction_Part_2 {
     @Test
     public void TC_03_Double_Click () throws InterruptedException {
         driver.get("https://automationfc.github.io/basic-form/index.html");
+        // neu chay tren Chrome va Edge thi ko can doan scroll; chi can bo sung neu chay tren FF
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.xpath("//button[text()='Double click me']")));
         action.doubleClick(driver.findElement(By.xpath("//button[text()='Double click me']"))).perform();
         Thread.sleep(2000);

@@ -3,8 +3,6 @@ package webDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
 import org.testng.Assert;
@@ -12,10 +10,9 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.sql.Driver;
 import java.time.Duration;
 
-public class Topic_16_Action_Part_1 {
+public class Topic_16_Interactions_Part_1 {
     WebDriver driver;
     Actions action;
 
