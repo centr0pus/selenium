@@ -8,11 +8,9 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.io.*;
-import java.nio.charset.Charset;
 import java.time.Duration;
 
-public class Topic_19_Frame_IFrame {
+public class Topic_19_Frame_IFrame_Test {
     WebDriver driver;
 
     @BeforeClass
