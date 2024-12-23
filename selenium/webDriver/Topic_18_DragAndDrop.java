@@ -2,6 +2,7 @@ package webDriver;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chromium.ChromiumDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
@@ -19,7 +20,7 @@ public class Topic_18_DragAndDrop {
 
     @BeforeClass
     public void beforeClass(){
-        driver = new FirefoxDriver();
+        driver = new ChromeDriver();
         actions = new Actions(driver);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
@@ -59,22 +60,6 @@ public class Topic_18_DragAndDrop {
         Assert.assertEquals(driver.findElement(columB).getText(),"A");
 
 
-    }
-
-    @Test
-    public void TC_03_IFrame_Framre(){
-        driver.get("https://toidicodedao.com/");
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView(true);",driver.findElement(By.cssSelector("div.fb_iframe_widget iframe")));
-
-        Assert.assertTrue(driver.findElement(By.cssSelector("div.fb_iframe_widget iframe")).isDisplayed());
-
-        driver.switchTo().frame(driver.findElement(By.cssSelector("div.fb_iframe_widget iframe")));
-
-        String numberFollower = driver.findElement(By.xpath("//a[@title='Tôi đi code dạo']/parent::div/following-sibling::div")).getText();
-
-        Assert.assertEquals(driver.findElement(By.xpath("//a[@title='Tôi đi code dạo']/parent::div/following-sibling::div")).getText(),numberFollower);
-        //driver.findElement(By.xpath("//a[@title='Tôi đi code dạo']/parent::div/following-sibling::div")).getText();
     }
 
 
