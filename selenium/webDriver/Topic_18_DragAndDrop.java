@@ -77,30 +77,6 @@ public class Topic_18_DragAndDrop {
         //driver.findElement(By.xpath("//a[@title='Tôi đi code dạo']/parent::div/following-sibling::div")).getText();
     }
 
-    @Test
-    public void TC_04_Frame_FormSite() throws InterruptedException {
-        Select select;
-
-        driver.get("https://www.formsite.com/templates/education/campus-safety-survey/");
-
-        driver.findElement(By.id("imageTemplateContainer")).click();
-        Thread.sleep(3000);
-
-        driver.switchTo().frame(driver.findElement(By.id("frame-one85593366")));
-
-        new Select(driver.findElement(By.xpath("//label[text()='Year ']/following-sibling::select"))).selectByVisibleText("Junior");
-
-        new Select(driver.findElement(By.xpath("//label[text()='Residence ']/following-sibling::select"))).selectByVisibleText("Off Campus");
-
-        ((JavascriptExecutor)driver).executeScript("arguments[0].click();",driver.findElement(By.xpath("//label[text()='Male']/preceding-sibling::input")));
-
-        Assert.assertTrue(driver.findElement(By.xpath("//label[text()='Male']/preceding-sibling::input")).isSelected());
-        Thread.sleep(5000);
-
-
-
-
-    }
 
     @AfterClass
     public void afterClass (){
