@@ -61,8 +61,6 @@ public class Topic_18_DragAndDrop {
 
     }
 
-
-
     @AfterClass
     public void afterClass (){
        // driver.quit();

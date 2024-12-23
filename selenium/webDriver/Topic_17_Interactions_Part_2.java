@@ -73,6 +73,7 @@ public class Topic_17_Interactions_Part_2 {
         driver.get("https://automationfc.github.io/basic-form/index.html");
         // neu chay tren Chrome va Edge thi ko can doan scroll; chi can bo sung neu chay tren FF
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.xpath("//button[text()='Double click me']")));
+
         action.doubleClick(driver.findElement(By.xpath("//button[text()='Double click me']"))).perform();
         Thread.sleep(2000);
         Assert.assertEquals(driver.findElement(By.id("demo")).getText(),"Hello Automation Guys!");
