@@ -1,8 +1,6 @@
-package webdriver;
+package webDriver;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -12,7 +10,7 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.time.Duration;
 
-public class Topic_00_Template {
+public class Topic_20_Fixed_Popup {
     WebDriver driver;
 
     @BeforeClass
